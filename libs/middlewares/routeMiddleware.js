@@ -7,8 +7,10 @@ export default function (app) {
     app.use('/uploads', express.static('uploads'));
 
     app.use((req, res, next) => {
-        res.writeHead(404, { 'Content-Type': 'application/json' });
-        res.write('404 Not found');
-        res.end();
+        res.status(404);
+        res.format({
+            json() { res.json({ error: 'not found' }); },
+            default() { res.type('txt').send('not found'); },
+        });
     });
 }

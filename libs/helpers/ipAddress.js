@@ -1,5 +1,5 @@
 const ip = require('ip');
-let os = require('os');
+const os = require('os');
 
 module.exports = {
     getIpAddress: () => {
@@ -7,7 +7,7 @@ module.exports = {
         try {
             let networkInterfaces = os.networkInterfaces();
             const ipV4 = networkInterfaces['Wi-Fi'].find(e => e.family = "IPv4");
-            ipAddress = ip.address().includes("192") ? ip.address() : ipV4.address;
+            ipAddress = ipV4.address;
             ipAddress = `http://${ipAddress}`;
         } catch (error) {
             ipAddress = ip.address();
